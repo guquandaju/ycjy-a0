@@ -1,0 +1,79 @@
+{
+  "fields": [
+    {
+      "name": "id",
+      "type": "string",
+      "required": true,
+      "isPrimary": true
+    },
+    {
+      "name": "patientId",
+      "type": "string",
+      "required": true,
+      "description": "患者ID"
+    },
+    {
+      "name": "patientName",
+      "type": "string",
+      "required": true,
+      "description": "患者姓名"
+    },
+    {
+      "name": "taskId",
+      "type": "string",
+      "required": true,
+      "description": "检验任务ID"
+    },
+    {
+      "name": "testItems",
+      "type": "array",
+      "required": true,
+      "description": "检验项目列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "name": {"type": "string"},
+          "normalRange": {"type": "string"},
+          "result": {"type": "string"},
+          "unit": {"type": "string"},
+          "status": {"type": "string", "enum": ["pending", "completed"]}
+        }
+      }
+    },
+    {
+      "name": "doctorNotes",
+      "type": "string",
+      "description": "医生备注"
+    },
+    {
+      "name": "labNotes",
+      "type": "string",
+      "description": "检验备注"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": true,
+      "enum": ["pending", "in-progress", "completed"],
+      "description": "检验状态"
+    },
+    {
+      "name": "submittedBy",
+      "type": "string",
+      "required": true,
+      "description": "提交人"
+    },
+    {
+      "name": "submittedAt",
+      "type": "timestamp",
+      "required": true,
+      "description": "提交时间"
+    },
+    {
+      "name": "completedAt",
+      "type": "timestamp",
+      "description": "完成时间"
+    }
+  ]
+}
