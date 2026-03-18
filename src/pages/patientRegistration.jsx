@@ -72,7 +72,7 @@ export default function PatientRegistration(props) {
         address: formData.address || '',
         medicalHistory: formData.medicalHistory || '',
         emergencyContact: formData.emergencyContact || '',
-        emergencyPhon: formData.emergencyPhone || '',
+        emergencyPhone: formData.emergencyPhone || '',
         village: '幸福村',
         hospitalId: 'hospital_001',
         createTime: new Date().toISOString(),
