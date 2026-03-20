@@ -282,7 +282,9 @@ export default function VillageDashboard(props) {
                   {getTotalPages(patients) > 1 && <Pagination>
                     <PaginationContent>
                       <PaginationItem>
-                        <PaginationPrevious onClock={() => setPatientsPage(Math.max(1, patientsPage - 1))} />
+                        <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))}>
+                          上一页
+                        </PaginationPrevious>
                       </PaginationItem>
                       
                       {Array.from({
@@ -290,7 +292,7 @@ export default function VillageDashboard(props) {
                   }, (_, i) => {
                     const pageNum = i + 1;
                     return <PaginationItem key={pageNum}>
-                            <PaginationLink onClock={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
+                            <PaginationLink onClick={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
                               {pageNum}
                             </PaginationLink>
                           </PaginationItem>;
@@ -301,7 +303,9 @@ export default function VillageDashboard(props) {
                       </PaginationItem>}
                       
                       <PaginationItem>
-                        <PaginationNext onClock={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))} />
+                        <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))}>
+                          下一页
+                        </PaginationNext>
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>}
@@ -336,7 +340,9 @@ export default function VillageDashboard(props) {
                   {getTotalPages(testTasks) > 1 && <Pagination>
                     <PaginationContent>
                       <PaginationItem>
-                        <PaginationPrevious onClock={() => setTestsPage(Math.max(1, testsPage - 1))} />
+                        <PaginationPrevious onClick={() => setTestsPage(Math.max(1, testsPage - 1))}>
+                          上一页
+                        </PaginationPrevious>
                       </PaginationItem>
                       
                       {Array.from({
@@ -344,7 +350,7 @@ export default function VillageDashboard(props) {
                   }, (_, i) => {
                     const pageNum = i + 1;
                     return <PaginationItem key={pageNum}>
-                            <PaginationLink onClock={() => setTestsPage(pageNum)} isActive={testsPage === pageNum}>
+                            <PaginationLink onClick={() => setTestsPage(pageNum)} isActive={testsPage === pageNum}>
                               {pageNum}
                             </PaginationLink>
                           </PaginationItem>;
@@ -355,7 +361,9 @@ export default function VillageDashboard(props) {
                       </PaginationItem>}
                       
                       <PaginationItem>
-                        <PaginationNext onClock={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))} />
+                        <PaginationNext onClick={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))}>
+                          下一页
+                        </PaginationNext>
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>}
