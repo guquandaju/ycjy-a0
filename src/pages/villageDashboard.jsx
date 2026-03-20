@@ -37,7 +37,7 @@ export default function VillageDashboard(props) {
       setIsLoading(true);
 
       // 获取患者数据
-      const patientsResult = await medicalAPI.getPatients('village-001');
+      const patientsResult = await medicalAPI.getPatients('{ "data": [{ "_id": "p001" }]}');
       if (patientsResult.success) {
         setPatients(patientsResult.data);
       } else {
