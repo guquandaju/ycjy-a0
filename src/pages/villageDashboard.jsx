@@ -156,223 +156,215 @@ export default function VillageDashboard(props) {
     };
     return <Badge variant={variants[status]}>{labels[status]}</Badge>;
   };
-  return <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50 p-4 md:p-6">
       {/* 头部 */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="w-full px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">乡镇卫生院工作台</h1>
-              <p className="text-sm sm:text-base text-gray-600">远程检验平台 - 患者管理与检验申请</p>
-            </div>
-            <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-              <Button onClick={handleRefresh} disabled={isLoading} variant="outline" size="sm" className="flex items-center gap-1 text-xs sm:text-sm">
-                <RefreshCw className={`w-3 h-3 sm:w-4 sm:h-4 ${isLoading ? 'animate-spin' : ''}`} />
-                {isLoading ? '加载中...' : '刷新'}
-              </Button>
-              <Button onClick={handleNewPatient} size="sm" className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-xs sm:text-sm">
-                <Plus className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                新患者
-              </Button>
-              <Button onClick={handleNewTest} size="sm" className="bg-green-600 hover:bg-green-700 active:bg-green-800 text-xs sm:text-sm">
-                <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                检验
-              </Button>
-            </div>
+      <div className="mb-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div className="mb-4 md:mb-0">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">乡镇卫生院工作台</h1>
+            <p className="text-gray-600 mt-1">远程检验平台 - 患者管理与检验申请</p>
+          </div>
+          
+          <div className="flex flex-wrap gap-2">
+            <Button variant="outline" onClick={handleRefresh} disabled={isLoading} className="flex items-center gap-2">
+              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+              {isLoading ? '加载中...' : '刷新'}
+            </Button>
+            
+            <Button onClick={handleNewPatient} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700">
+              <Plus className="w-4 h-4" />
+              新患者
+            </Button>
+            
+            <Button onClick={handleNewTest} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
+              <FileText className="w-4 h-4" />
+              检验
+            </Button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* 主体内容 */}
-      <main>
-        <div className="w-full px-4 py-6 sm:px-6 lg:px-8">
-          {/* 统计卡片 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
-            <Card className="min-h-0">
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-blue-100 p-2 sm:p-3 mr-3 sm:mr-4">
-                    <User className="w-4 h-4 sm:w-6 sm:h-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium text-gray-600">患者总数</p>
-                    <p className="text-lg sm:text-2xl font-bold text-gray-900">{patients.length}</p>
-                  </div>
+      <div className="space-y-6">
+        {/* 统计卡片 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <User className="w-6 h-6 text-blue-600" />
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="min-h-0">
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-green-100 p-2 sm:p-3 mr-3 sm:mr-4">
-                    <FileText className="w-4 h-4 sm:w-6 sm:h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium text-gray-600">检验任务</p>
-                    <p className="text-lg sm:text-2xl font-bold text-gray-900">{testTasks.length}</p>
-                  </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">患者总数</p>
+                  <p className="text-2xl font-bold text-gray-900">{patients.length}</p>
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="min-h-0">
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-orange-100 p-2 sm:p-3 mr-3 sm:mr-4">
-                    <CheckCircle className="w-4 h-4 sm:w-6 sm:h-6 text-orange-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium text-gray-600">已完成</p>
-                    <p className="text-lg sm:text-2xl font-bold text-gray-900">{testTasks.filter(task => task.status === 'completed').length}</p>
-                  </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <FileText className="w-6 h-6 text-green-600" />
                 </div>
-              </CardContent>
-            </Card>
-            <Card className="min-h-0">
-              <CardContent className="p-4 sm:p-6">
-                <div className="flex items-center">
-                  <div className="rounded-full bg-purple-100 p-2 sm:p-3 mr-3 sm:mr-4">
-                    <Clock className="w-4 h-4 sm:w-6 sm:h-6 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-medium text-gray-600">待处理</p>
-                    <p className="text-lg sm:text-2xl font-bold text-gray-900">{testTasks.filter(task => task.status === 'pending').length}</p>
-                  </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">检验任务</p>
+                  <p className="text-2xl font-bold text-gray-900">{testTasks.length}</p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <CheckCircle className="w-6 h-6 text-green-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">已完成</p>
+                  <p className="text-2xl font-bold text-gray-900">{testTasks.filter(task => task.status === 'completed').length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center">
+                <div className="p-2 bg-yellow-100 rounded-lg">
+                  <Clock className="w-6 h-6 text-yellow-600" />
+                </div>
+                <div className="ml-4">
+                  <p className="text-sm font-medium text-gray-600">待处理</p>
+                  <p className="text-2xl font-bold text-gray-900">{testTasks.filter(task => task.status === 'pending').length}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* 标签页 */}
-          <div className="bg-white rounded-lg shadow-sm border">
-            <div className="border-b">
-              <nav className="flex space-x-8 px-6">
-                <button onClick={() => setActiveTab('patients')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
-                  患者管理 ({patients.length})
-                </button>
-                <button onClick={() => setActiveTab('tests')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
-                  检验任务 ({testTasks.length})
-                </button>
-              </nav>
+        {/* 标签页 */}
+        <Card>
+          <div className="border-b">
+            <div className="flex space-x-8">
+              <button onClick={() => setActiveTab('patients')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                患者管理 ({patients.length})
+              </button>
+              <button onClick={() => setActiveTab('tests')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                检验任务 ({testTasks.length})
+              </button>
             </div>
-
-            <div className="p-6">
-              {activeTab === 'patients' && <div>
-                  <div className="space-y-4 mb-6">
-                    {getPaginatedItems(patients, patientsPage).map(patient => <Card key={patient.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
-                  pageId: 'patientDetail',
-                  params: {
-                    patientId: patient.id
-                  }
-                })}>
-                            <CardContent className="p-4">
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  <h3 className="font-medium text-gray-900">{patient.name}</h3>
-                                  <p className="text-sm text-gray-600">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
-                                </div>
-                                <div className="text-right">
-                                  <p className="text-sm text-gray-500">最近就诊</p>
-                                  <p className="text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                  </div>
-                  
-                  {getTotalPages(patients) > 1 && <Pagination className="text-zh-CN">
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))}>
-                          <span className="sr-only">Previous</span>
-                          上一页
-                        </PaginationPrevious>
-                      </PaginationItem>
-                      
-                      {Array.from({
+          </div>
+          
+          <CardContent className="p-0">
+            {activeTab === 'patients' && <div>
+                <div className="divide-y">
+                  {getPaginatedItems(patients, patientsPage).map(patient => <div key={patient.id} className="p-6 hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => props.$w.utils.navigateTo({
+                pageId: 'patientDetail',
+                params: {
+                  patientId: patient.id
+                }
+              })}>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="font-medium text-gray-900">{patient.name}</h3>
+                          <p className="text-sm text-gray-600 mt-1">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm text-gray-600">最近就诊</p>
+                          <p className="text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
+                        </div>
+                      </div>
+                    </div>)}
+                </div>
+                
+                {getTotalPages(patients) > 1 && <div className="border-t p-4">
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))} />
+                        </PaginationItem>
+                        
+                        {Array.from({
                     length: Math.min(5, getTotalPages(patients))
                   }, (_, i) => {
                     const pageNum = i + 1;
                     return <PaginationItem key={pageNum}>
-                            <PaginationLink onClick={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
-                              {pageNum}
-                            </PaginationLink>
-                          </PaginationItem>;
+                              <PaginationLink onClick={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
+                                {pageNum}
+                              </PaginationLink>
+                            </PaginationItem>;
                   })}
-                      
-                      {getTotalPages(patients) > 5 && <PaginationItem>
-                        <PaginationEllipsis />
-                      </PaginationItem>}
-                      
-                      <PaginationItem>
-                        <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))}>
-                          <span className="sr-only">Next</span>
-                          下一页
-                        </PaginationNext>
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>}
-                </div>}
+                        
+                        {getTotalPages(patients) > 5 && <PaginationItem>
+                            <PaginationEllipsis />
+                          </PaginationItem>}
+                        
+                        <PaginationItem>
+                          <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))} />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>}
+              </div>}
 
-              {activeTab === 'tests' && <div>
-                  <div className="space-y-4 mb-6">
-                    {getPaginatedItems(testTasks, testsPage).map(task => <Card key={task.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
-                  pageId: 'testTaskDetail',
-                  params: {
-                    taskId: task.id
-                  }
-                })}>
-                            <CardContent className="p-4">
-                              <div className="flex justify-between items-center">
-                                <div>
-                                  <h3 className="font-medium text-gray-900">{task.patientName}</h3>
-                                  <p className="text-sm text-gray-600">{task.testType}</p>
-                                </div>
-                                <div className="text-right">
-                                  <div className="mb-2">
-                                    {getStatusBadge(task.status)}
-                                  </div>
-                                  <p className="text-sm text-gray-500">提交时间: {task.submitDate}</p>
-                                  {task.resultDate && <p className="text-sm text-gray-500">结果时间: {task.resultDate}</p>}
-                                </div>
-                              </div>
-                            </CardContent>
-                          </Card>)}
-                  </div>
-                  
-                  {getTotalPages(testTasks) > 1 && <Pagination>
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious onClick={() => setTestsPage(Math.max(1, testsPage - 1))}>
-                          上一页
-                        </PaginationPrevious>
-                      </PaginationItem>
-                      
-                      {Array.from({
+            {activeTab === 'tests' && <div>
+                <div className="divide-y">
+                  {getPaginatedItems(testTasks, testsPage).map(task => <div key={task.id} className="p-6 hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => props.$w.utils.navigateTo({
+                pageId: 'testTaskDetail',
+                params: {
+                  taskId: task.id
+                }
+              })}>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h3 className="font-medium text-gray-900">{task.patientName}</h3>
+                          <p className="text-sm text-gray-600 mt-1">{task.testType}</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="mb-2">
+                            {getStatusBadge(task.status)}
+                          </div>
+                          <p className="text-sm text-gray-600">提交时间: {task.submitDate}</p>
+                          {task.resultDate && <p className="text-sm text-gray-600">结果时间: {task.resultDate}</p>}
+                        </div>
+                      </div>
+                    </div>)}
+                </div>
+                
+                {getTotalPages(testTasks) > 1 && <div className="border-t p-4">
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious onClick={() => setTestsPage(Math.max(1, testsPage - 1))} />
+                        </PaginationItem>
+                        
+                        {Array.from({
                     length: Math.min(5, getTotalPages(testTasks))
                   }, (_, i) => {
                     const pageNum = i + 1;
                     return <PaginationItem key={pageNum}>
-                            <PaginationLink onClick={() => setTestsPage(pageNum)} isActive={testsPage === pageNum}>
-                              {pageNum}
-                            </PaginationLink>
-                          </PaginationItem>;
+                              <PaginationLink onClick={() => setTestsPage(pageNum)} isActive={testsPage === pageNum}>
+                                {pageNum}
+                              </PaginationLink>
+                            </PaginationItem>;
                   })}
-                      
-                      {getTotalPages(testTasks) > 5 && <PaginationItem>
-                        <PaginationEllipsis />
-                      </PaginationItem>}
-                      
-                      <PaginationItem>
-                        <PaginationNext onClick={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))}>
-                          下一页
-                        </PaginationNext>
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>}
-                </div>}
-            </div>
-          </div>
-        </div>
-      </main>
+                        
+                        {getTotalPages(testTasks) > 5 && <PaginationItem>
+                            <PaginationEllipsis />
+                          </PaginationItem>}
+                        
+                        <PaginationItem>
+                          <PaginationNext onClick={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))} />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>}
+              </div>}
+          </CardContent>
+        </Card>
+      </div>
     </div>;
 }
