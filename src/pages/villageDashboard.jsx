@@ -284,7 +284,9 @@ export default function VillageDashboard(props) {
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
-                          <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))} />
+                          <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))}>
+                            上一页
+                          </PaginationPrevious>
                         </PaginationItem>
                         
                         {Array.from({
@@ -303,7 +305,9 @@ export default function VillageDashboard(props) {
                           </PaginationItem>}
                         
                         <PaginationItem>
-                          <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))} />
+                          <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))}>
+                            下一页
+                          </PaginationNext>
                         </PaginationItem>
                       </PaginationContent>
                     </Pagination>
@@ -338,7 +342,9 @@ export default function VillageDashboard(props) {
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
-                          <PaginationPrevious onClick={() => setTestsPage(Math.max(1, testsPage - 1))} />
+                          <PaginationPrevious onClick={() => setTestsPage(Math.max(1, testsPage - 1))}>
+                            上一页
+                          </PaginationPrevious>
                         </PaginationItem>
                         
                         {Array.from({
@@ -357,7 +363,9 @@ export default function VillageDashboard(props) {
                           </PaginationItem>}
                         
                         <PaginationItem>
-                          <PaginationNext onClick={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))} />
+                          <PaginationNext onClick={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))}>
+                            下一页
+                          </PaginationNext>
                         </PaginationItem>
                       </PaginationContent>
                     </Pagination>
