@@ -1,7 +1,7 @@
 // @ts-ignore;
 import React, { useState, useEffect } from 'react';
 // @ts-ignore;
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, useToast } from '@/components/ui';
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, useToast, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui';
 // @ts-ignore;
 import { Plus, User, FileText, Clock, CheckCircle, RefreshCw } from 'lucide-react';
 
@@ -12,9 +12,24 @@ export default function VillageDashboard(props) {
   const [patients, setPatients] = useState([]);
   const [testTasks, setTestTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // 分页状态
+  const [patientsPage, setPatientsPage] = useState(1);
+  const [testsPage, setTestsPage] = useState(1);
+  const itemsPerPage = 5;
   const {
     toast
   } = useToast();
+
+  // 分页计算函数
+  const getPaginatedItems = (items, currentPage) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return items.slice(startIndex, endIndex);
+  };
+  const getTotalPages = items => {
+    return Math.ceil(items.length / itemsPerPage);
+  };
 
   // 从外部API加载数据
   const loadDashboardData = async () => {
@@ -241,51 +256,109 @@ export default function VillageDashboard(props) {
             </div>
 
             <div className="p-6">
-              {activeTab === 'patients' && <div className="space-y-4">
-                  {patients.map(patient => <Card key={patient.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
-                pageId: 'patientDetail',
-                params: {
-                  patientId: patient.id
-                }
-              })}>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-medium text-gray-900">{patient.name}</h3>
-                            <p className="text-sm text-gray-600">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm text-gray-500">最近就诊</p>
-                            <p className="text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>)}
+              {activeTab === 'patients' && <div>
+                  <div className="space-y-4 mb-6">
+                    {getPaginatedItems(patients, patientsPage).map(patient => <Card key={patient.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
+                  pageId: 'patientDetail',
+                  params: {
+                    patientId: patient.id
+                  }
+                })}>
+                            <CardContent className="p-4">
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <h3 className="font-medium text-gray-900">{patient.name}</h3>
+                                  <p className="text-sm text-gray-600">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-sm text-gray-500">最近就诊</p>
+                                  <p className="text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                  </div>
+                  
+                  {getTotalPages(patients) > 1 && <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious onClock={() => setPatientsPage(Math.max(1, patientsPage - 1))} />
+                      </PaginationItem>
+                      
+                      {Array.from({
+                    length: Math.min(5, getTotalPages(patients))
+                  }, (_, i) => {
+                    const pageNum = i + 1;
+                    return <PaginationItem key={pageNum}>
+                            <PaginationLink onClock={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
+                              {pageNum}
+                            </PaginationLink>
+                          </PaginationItem>;
+                  })}
+                      
+                      {getTotalPages(patients) > 5 && <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>}
+                      
+                      <PaginationItem>
+                        <PaginationNext onClock={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))} />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>}
                 </div>}
 
-              {activeTab === 'tests' && <div className="space-y-4">
-                  {testTasks.map(task => <Card key={task.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
-                pageId: 'testTaskDetail',
-                params: {
-                  taskId: task.id
-                }
-              })}>
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-center">
-                          <div>
-                            <h3 className="font-medium text-gray-900">{task.patientName}</h3>
-                            <p className="text-sm text-gray-600">{task.testType}</p>
-                          </div>
-                          <div className="text-right">
-                            <div className="mb-2">
-                              {getStatusBadge(task.status)}
-                            </div>
-                            <p className="text-sm text-gray-500">提交时间: {task.submitDate}</p>
-                            {task.resultDate && <p className="text-sm text-gray-500">结果时间: {task.resultDate}</p>}
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>)}
+              {activeTab === 'tests' && <div>
+                  <div className="space-y-4 mb-6">
+                    {getPaginatedItems(testTasks, testsPage).map(task => <Card key={task.id} className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => props.$w.utils.navigateTo({
+                  pageId: 'testTaskDetail',
+                  params: {
+                    taskId: task.id
+                  }
+                })}>
+                            <CardContent className="p-4">
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <h3 className="font-medium text-gray-900">{task.patientName}</h3>
+                                  <p className="text-sm text-gray-600">{task.testType}</p>
+                                </div>
+                                <div className="text-right">
+                                  <div className="mb-2">
+                                    {getStatusBadge(task.status)}
+                                  </div>
+                                  <p className="text-sm text-gray-500">提交时间: {task.submitDate}</p>
+                                  {task.resultDate && <p className="text-sm text-gray-500">结果时间: {task.resultDate}</p>}
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>)}
+                  </div>
+                  
+                  {getTotalPages(testTasks) > 1 && <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious onClock={() => setTestsPage(Math.max(1, testsPage - 1))} />
+                      </PaginationItem>
+                      
+                      {Array.from({
+                    length: Math.min(5, getTotalPages(testTasks))
+                  }, (_, i) => {
+                    const pageNum = i + 1;
+                    return <PaginationItem key={pageNum}>
+                            <PaginationLink onClock={() => setTestsPage(pageNum)} isActive={testsPage === pageNum}>
+                              {pageNum}
+                            </PaginationLink>
+                          </PaginationItem>;
+                  })}
+                      
+                      {getTotalPages(testTasks) > 5 && <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>}
+                      
+                      <PaginationItem>
+                        <PaginationNext onClock={() => setTestsPage(Math.min(getTotalPages(testTasks), testsPage + 1))} />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>}
                 </div>}
             </div>
           </div>
