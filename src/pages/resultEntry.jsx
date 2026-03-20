@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle, Button, Input, Textarea, useT
 // @ts-ignore;
 import { ArrowLeft, Save, CheckCircle, AlertCircle } from 'lucide-react';
 
+import { getDatabaseTimestamp } from '@/lib/dateUtils';
+// @ts-ignore;
+
 export default function ResultEntry(props) {
   const {
     toast

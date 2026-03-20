@@ -5,6 +5,9 @@ import { Button, Input, Card, CardContent, CardDescription, CardHeader, CardTitl
 // @ts-ignore;
 import { ArrowLeft, Save } from 'lucide-react';
 
+import { getDatabaseTimestamp } from '@/lib/dateUtils';
+// @ts-ignore;
+
 import { apiCaller } from '@/lib/apiUtils';
 export default function PatientRegistration(props) {
   const [formData, setFormData] = useState({

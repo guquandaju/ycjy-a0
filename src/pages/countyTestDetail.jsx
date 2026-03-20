@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle, Button, Badge, Input, Textare
 // @ts-ignore;
 import { ArrowLeft, User, Calendar, Clock, FileText, CheckCircle, AlertCircle, Download, Printer } from 'lucide-react';
 
+import { getDatabaseTimestamp } from '@/lib/dateUtils';
+// @ts-ignore;
+
 export default function CountyTestDetail(props) {
   const [task, setTask] = useState(null);
   const [results, setResults] = useState({});
