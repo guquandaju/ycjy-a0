@@ -167,7 +167,7 @@ export default function PatientRegistration(props) {
             {/* 紧急联系人 */}
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4">紧急联系人信息</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <Label htmlFor="emergencyContact">紧急联系人姓名</Label>
                   <Input id="emergencyContact" value={formData.emergencyContact} onChange={e => handleInputChange('emergencyContact', e.target.value)} placeholder="请输入紧急联系人姓名" />
@@ -190,11 +190,11 @@ export default function PatientRegistration(props) {
             </div>
 
             {/* 操作按钮 */}
-            <div className="flex justify-end space-x-4 pt-6 border-t">
-              <Button variant="outline" onClick={handleBack} className="hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition-all duration-200">
+            <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-6 border-t">
+              <Button variant="outline" onClick={handleBack} className="hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition-all duration-200 text-sm sm:text-base">
                 取消
               </Button>
-              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-98 transition-all duration-200 shadow-md hover:shadow-lg active:shadow-sm">
+              <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-98 transition-all duration-200 shadow-md hover:shadow-lg active:shadow-sm text-sm sm:text-base">
                 <Save className="w-4 h-4 mr-2" />
                 保存患者信息
               </Button>

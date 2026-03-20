@@ -681,24 +681,24 @@ export default function VillageDashboard(props) {
   return <div className="min-h-screen bg-gray-50 p-4 md:p-6">
       {/* 头部 */}
       <div className="mb-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center md:justify-between">
           <div className="mb-4 md:mb-0">
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">乡镇卫生院工作台</h1>
             <p className="text-gray-600 mt-1">远程检验平台 - 患者管理与检验申请</p>
           </div>
           
-          <div className="flex flex-wrap gap-2">
-            <Button variant="outline" onClick={handleRefresh} disabled={isLoading} className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+            <Button variant="outline" onClick={handleRefresh} disabled={isLoading} className="flex items-center gap-2 text-sm sm:text-base">
               <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
               {isLoading ? '加载中...' : '刷新'}
             </Button>
             
-            <Button onClick={handleNewPatient} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700">
+            <Button onClick={handleNewPatient} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-sm sm:text-base">
               <Plus className="w-4 h-4" />
               新患者
             </Button>
             
-            <Button onClick={handleNewTest} className="flex items-center gap-2 bg-green-600 hover:bg-green-700">
+            <Button onClick={handleNewTest} className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-sm sm:text-base">
               <FileText className="w-4 h-4" />
               检验
             </Button>
@@ -709,7 +709,7 @@ export default function VillageDashboard(props) {
       {/* 主体内容 */}
       <div className="space-y-6">
         {/* 统计卡片 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
@@ -770,11 +770,11 @@ export default function VillageDashboard(props) {
         {/* 标签页 */}
         <Card>
           <div className="border-b">
-            <div className="flex space-x-8">
-              <button onClick={() => setActiveTab('patients')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            <div className="flex flex-col sm:flex-row sm:space-x-8 space-y-4 sm:space-y-0">
+              <button onClick={() => setActiveTab('patients')} className={`py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 患者管理 ({patients.length})
               </button>
-              <button onClick={() => setActiveTab('tests')} className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+              <button onClick={() => setActiveTab('tests')} className={`py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 检验任务 ({testTasks.length})
               </button>
             </div>
@@ -789,14 +789,14 @@ export default function VillageDashboard(props) {
                   patientId: patient.id
                 }
               })}>
-                      <div className="flex justify-between items-center">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
                         <div>
-                          <h3 className="font-medium text-gray-900">{patient.name}</h3>
-                          <p className="text-sm text-gray-600 mt-1">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
+                          <h3 className="font-medium text-gray-900 text-sm sm:text-base">{patient.name}</h3>
+                          <p className="text-xs sm:text-sm text-gray-600 mt-1">{patient.age}岁 • {patient.gender} • {patient.phone}</p>
                         </div>
-                        <div className="text-right">
-                          <p className="text-sm text-gray-600">最近就诊</p>
-                          <p className="text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
+                        <div className="text-left sm:text-right">
+                          <p className="text-xs sm:text-sm text-gray-600">最近就诊</p>
+                          <p className="text-xs sm:text-sm font-medium text-gray-900">{formatLocalTime(patient.lastVisit)}</p>
                         </div>
                       </div>
                     </div>)}

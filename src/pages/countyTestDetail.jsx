@@ -155,7 +155,7 @@ export default function CountyTestDetail(props) {
     });
   };
   if (!task) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-0">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">加载中...</p>
@@ -166,15 +166,15 @@ export default function CountyTestDetail(props) {
       {/* 头部导航 */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" onClick={() => props.$w.utils.navigateBack()} className="flex items-center space-x-2 text-gray-600 hover:text-gray-900">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <Button variant="ghost" onClick={() => props.$w.utils.navigateBack()} className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-gray-900 text-sm sm:text-base">
               <ArrowLeft className="w-4 h-4" />
               <span>返回工作台</span>
             </Button>
             <div className="flex-1">
               <h1 className="text-xl font-semibold text-gray-900">检验任务详情</h1>
             </div>
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2 sm:space-x-2">
               <Button size="sm" className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white" onClick={() => props.$w.utils.navigateTo({
               pageId: 'resultEntry',
               params: {
@@ -198,7 +198,7 @@ export default function CountyTestDetail(props) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* 左侧 - 患者信息 */}
           <div className="lg:col-span-1 space-y-6">
             <Card>
@@ -270,13 +270,13 @@ export default function CountyTestDetail(props) {
                 </div>
 
                 <div className="space-y-4">
-                  {task.testItems.map(item => <div key={item.id} className="flex items-center space-x-4 p-3 border rounded-lg">
+                  {task.testItems.map(item => <div key={item.id} className="flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 p-3 border rounded-lg">
                       <div className="flex-1">
-                        <div className="flex justify-between items-center mb-1">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-1 sm:space-y-0 mb-1">
                           <span className="font-medium">{item.name}</span>
                           <span className="text-sm text-gray-500">{item.normalRange}</span>
                         </div>
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 sm:space-x-2">
                           <Input placeholder="录入检验结果" value={results[item.id] || ''} onChange={e => handleResultChange(item.id, e.target.value)} className="flex-1" />
                           <span className="text-sm text-gray-500 w-16">{item.unit}</span>
                         </div>
