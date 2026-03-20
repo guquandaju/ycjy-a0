@@ -95,8 +95,8 @@ export default function ResultEntry(props) {
           labNotes: labNotes,
           status: 'completed',
           submittedBy: props.$w.auth.currentUser?.name || '检验员',
-          submittedAt: new Date().toISOString(),
-          completedAt: new Date().toISOString()
+          submittedAt: getDatabaseTimestamp(),
+          completedAt: getDatabaseTimestamp()
         }
       });
       toast({

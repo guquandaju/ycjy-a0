@@ -83,7 +83,7 @@ export default function CountyTestDetail(props) {
       const updatedTask = {
         ...task,
         status: 'completed',
-        resultDate: new Date().toLocaleString('zh-CN')
+        resultDate: getDatabaseTimestamp()
       };
       setTask(updatedTask);
       setIsEditing(false);

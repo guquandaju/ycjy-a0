@@ -73,8 +73,8 @@ export default function PatientRegistration(props) {
         emergencyPhone: formData.emergencyPhone || '',
         village: '幸福村',
         hospitalId: 'vh001',
-        createTime: new Date().toISOString().replace('T', ' ').replace(/\.\+/, ''),
-        lastVisit: new Date().toISOString().replace('T', ' ').replace(/\.\+/, '')
+        createTime: getDatabaseTimestamp(),
+        lastVisit: getDatabaseTimestamp()
       };
 
       // 使用apiCaller.post调用外部API
