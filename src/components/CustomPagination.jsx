@@ -3,27 +3,17 @@ import React from 'react';
 // @ts-ignore;
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui';
 
-export default function CustomPagination({
+export function CustomPagination({
   currentPage,
   totalPages,
   onPageChange
 }) {
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
-  if (totalPages <= 1) return null;
   return <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={handlePrevious} disabled={currentPage <= 1}>
-            上一页
+          <PaginationPrevious onClick={() => onPageChange(Math.max(1, currentPage - 1))} className="flex items-center gap-1">
+            <span>‹</span>
+            <span>上一页</span>
           </PaginationPrevious>
         </PaginationItem>
         
@@ -43,8 +33,9 @@ export default function CustomPagination({
           </PaginationItem>}
         
         <PaginationItem>
-          <PaginationNext onClick={handleNext} disabled={currentPage >= totalPages}>
-            下一页
+          <PaginationNext onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} className="flex items-center gap-1">
+            <span>下一页</span>
+            <span>›</span>
           </PaginationNext>
         </PaginationItem>
       </PaginationContent>
