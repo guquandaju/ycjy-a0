@@ -154,7 +154,7 @@ export default function VillageDashboard(props) {
       {/* 主体内容 */}
       <div className="space-y-4 sm:space-y-6">
         {/* 统计卡片 */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
@@ -215,11 +215,11 @@ export default function VillageDashboard(props) {
         {/* 标签页 */}
         <Card>
           <div className="border-b">
-            <div className="flex flex-col sm:flex-row sm:space-x-6 space-y-3 sm:space-y-0">
-              <button onClick={() => setActiveTab('patients')} className={`py-2 sm:py-3 px-1 border-b-2 font-medium text-xs sm:text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+            <div className="flex space-x-4">
+              <button onClick={() => setActiveTab('patients')} className={`py-2 px-3 border-b-2 font-medium text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 患者管理 ({patients.length})
               </button>
-              <button onClick={() => setActiveTab('tests')} className={`py-2 sm:py-3 px-1 border-b-2 font-medium text-xs sm:text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+              <button onClick={() => setActiveTab('tests')} className={`py-2 px-3 border-b-2 font-medium text-sm ${activeTab === 'tests' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 检验任务 ({testTasks.length})
               </button>
             </div>
