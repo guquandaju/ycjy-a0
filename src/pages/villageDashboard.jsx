@@ -49,7 +49,7 @@ export default function VillageDashboard(props) {
       }
 
       // 获取检验任务数据
-      const tasksResult = await medicalAPI.getTestTasks('village-001');
+      const tasksResult = await medicalAPI.getTestTasks('{ "data": [{ "_id": "p001" }]}');
       if (tasksResult.success) {
         setTestTasks(tasksResult.data);
       } else {
