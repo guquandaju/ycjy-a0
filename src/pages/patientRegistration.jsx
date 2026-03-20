@@ -5,10 +5,7 @@ import { Button, Input, Card, CardContent, CardDescription, CardHeader, CardTitl
 // @ts-ignore;
 import { ArrowLeft, Save } from 'lucide-react';
 
-// @ts-ignore;
 import { apiCaller } from '@/lib/apiUtils';
-// @ts-ignore;
-
 export default function PatientRegistration(props) {
   const [formData, setFormData] = useState({
     name: '',
@@ -65,7 +62,8 @@ export default function PatientRegistration(props) {
       // 使用POST方式调用外部API保存患者信息
       const patientData = {
         name: formData.name,
-        gender: formData.gender === 'male' ? '男' : '女',
+        gender: formData.gender,
+        // === 'male' ? '男' : '女',
         age: parseInt(formData.age),
         idCard: formData.idCard || '',
         phone: formData.phone,
@@ -74,17 +72,13 @@ export default function PatientRegistration(props) {
         emergencyContact: formData.emergencyContact || '',
         emergencyPhone: formData.emergencyPhone || '',
         village: '幸福村',
-        hospitalId: 'hospital_001',
-        createTime: new Date().toISOString().replace('T', ' ').replace(/\..+/, ''),
-        lastVisit: new Date().toISOString().replace('T', ' ').replace(/\..+/, '')
+        hospitalId: 'vh001',
+        createTime: new Date().toISOString().replace('T', ' ').replace(/\.\+/, ''),
+        lastVisit: new Date().toISOString().replace('T', ' ').replace(/\.\+/, '')
       };
 
       // 使用apiCaller.post调用外部API
-      const result = await apiCaller.post('https://api.example.com/medical/patients', patientData, {
-        headers: {
-          'Authorization': 'Bearer your-auth-token' // 请替换为实际的认证token
-        }
-      });
+      const result = await apiCaller.post('http://127.0.0.1:3000/api/ris/addpatients', JSON.stringify(patientData));
       if (result.success || result.id) {
         toast({
           title: "患者登记成功",
@@ -110,18 +104,18 @@ export default function PatientRegistration(props) {
   const handleBack = () => {
     props.$w.utils.navigateBack();
   };
-  return <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4">
+  return <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-4xl mx-auto">
         {/* 头部 */}
-        <div className="flex items-center mb-6">
-          <Button variant="ghost" onClick={handleBack} className="mr-4 hover:bg-gray-100 active:bg-gray-200 active:scale-95 transition-all duration-200">
+        <div className="mb-6">
+          <Button variant="ghost" onClick={handleBack} className="mb-4 hover:bg-gray-100 active:bg-gray-200 active:scale-95 transition-all duration-200">
             <ArrowLeft className="w-4 h-4 mr-2" />
             返回
           </Button>
-          <h1 className="text-2xl font-bold text-gray-900">患者信息登记</h1>
+          <h1 className="text-3xl font-bold text-gray-900">患者信息登记</h1>
         </div>
 
-        <Card>
+        <Card className="shadow-lg">
           <CardHeader>
             <CardTitle>基本信息</CardTitle>
             <CardDescription>
@@ -131,16 +125,16 @@ export default function PatientRegistration(props) {
           <CardContent className="space-y-6">
             {/* 基本信息 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="name">姓名 *</Label>
                 <Input id="name" value={formData.name} onChange={e => handleInputChange('name', e.target.value)} placeholder="请输入患者姓名" />
               </div>
               
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="gender">性别 *</Label>
-                <Select onValueChange={value => handleInputChange('gender', value)}>
+                <Select value={formData.gender} onValueChange={value => handleInputChange('gender', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="选择性别" />
+                    <SelectValue placeholder="请选择性别" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="male">男</SelectItem>
@@ -149,22 +143,22 @@ export default function PatientRegistration(props) {
                 </Select>
               </div>
 
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="age">年龄 *</Label>
                 <Input id="age" type="number" value={formData.age} onChange={e => handleInputChange('age', e.target.value)} placeholder="请输入年龄" />
               </div>
 
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="idCard">身份证号</Label>
                 <Input id="idCard" value={formData.idCard} onChange={e => handleInputChange('idCard', e.target.value)} placeholder="请输入身份证号码" />
               </div>
 
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="phone">联系电话 *</Label>
                 <Input id="phone" value={formData.phone} onChange={e => handleInputChange('phone', e.target.value)} placeholder="请输入手机号码" />
               </div>
 
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="address">联系地址</Label>
                 <Input id="address" value={formData.address} onChange={e => handleInputChange('address', e.target.value)} placeholder="请输入详细地址" />
               </div>
@@ -174,12 +168,12 @@ export default function PatientRegistration(props) {
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4">紧急联系人信息</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
+                <div>
                   <Label htmlFor="emergencyContact">紧急联系人姓名</Label>
                   <Input id="emergencyContact" value={formData.emergencyContact} onChange={e => handleInputChange('emergencyContact', e.target.value)} placeholder="请输入紧急联系人姓名" />
                 </div>
                 
-                <div className="space-y-2">
+                <div>
                   <Label htmlFor="emergencyPhone">紧急联系电话</Label>
                   <Input id="emergencyPhone" value={formData.emergencyPhone} onChange={e => handleInputChange('emergencyPhone', e.target.value)} placeholder="请输入紧急联系电话" />
                 </div>
@@ -189,7 +183,7 @@ export default function PatientRegistration(props) {
             {/* 病史信息 */}
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4">病史信息</h3>
-              <div className="space-y-2">
+              <div>
                 <Label htmlFor="medicalHistory">既往病史</Label>
                 <textarea id="medicalHistory" value={formData.medicalHistory} onChange={e => handleInputChange('medicalHistory', e.target.value)} placeholder="请输入患者的既往病史、过敏史等信息" className="w-full min-h-[100px] p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
