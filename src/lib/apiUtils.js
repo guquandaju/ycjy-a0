@@ -209,7 +209,9 @@ export const medicalAPI = {
     // console.log('安全处理后的数据:', safeRawData);
     // console.log('安全数据长度:', safeRawData.length);
     
-    const adaptedData = Object.values(response.data)[1].map(patient => {
+    const dataArray = response && response.data ? Object.values(response.data) : [];
+    const patientData = dataArray.length > 1 ? dataArray[1] : [];
+    const adaptedData = Array.isArray(patientData) ? patientData.map(patient => {
       console.log('处理患者数据:', patient);
       return {
         id: patient._id,
@@ -220,7 +222,7 @@ export const medicalAPI = {
         phone: patient.phone,
         lastVisit: patient.created_at
                };
-    });
+    }) : [];
     
     return {
       success: response && response.data.mes === '成功',
@@ -244,7 +246,9 @@ export const medicalAPI = {
         
         // 调用您的后端API，使用POST方法
         const response = await apiCaller.post('http://127.0.0.1:3000/api/ris/getTestTasks', data);
-        const adaptedData = Object.values(response.data)[1].map(patient => {
+        const dataArray = response && response.data ? Object.values(response.data) : [];
+        const patientData = dataArray.length > 1 ? dataArray[1] : [];
+        const adaptedData = Array.isArray(patientData) ? patientData.map(patient => {
           console.log('处理患者数据:', patient);
           return {
             id: patient._id,
@@ -254,7 +258,7 @@ export const medicalAPI = {
             submitDate: patient.submitDate,
             resultDate: patient.resultDate
                    };
-        });
+        }) : [];
         
         return {
           success: response && response.data.mes === '成功',
