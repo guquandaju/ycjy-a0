@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 设置全局中文语言环境 */
-html {
-  lang: zh-CN;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;

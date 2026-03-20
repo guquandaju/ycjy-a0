@@ -279,7 +279,7 @@ export default function VillageDashboard(props) {
                           </Card>)}
                   </div>
                   
-                  {getTotalPages(patients) > 1 && <Pagination>
+                  {getTotalPages(patients) > 1 && <Pagination className="text-zh-CN">
                     <PaginationContent>
                       <PaginationItem>
                         <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))}>
