@@ -1,7 +1,7 @@
 // @ts-ignore;
 import React, { useState, useEffect } from 'react';
 // @ts-ignore;
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, useToast, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui';
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Badge, useToast, Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, CustomPagination } from '@/components/ui';
 // @ts-ignore;
 import { Plus, User, FileText, Clock, CheckCircle, RefreshCw } from 'lucide-react';
 
@@ -279,36 +279,7 @@ export default function VillageDashboard(props) {
                           </Card>)}
                   </div>
                   
-                  {getTotalPages(patients) > 1 && <Pagination className="text-zh-CN">
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious onClick={() => setPatientsPage(Math.max(1, patientsPage - 1))}>
-                          上一页
-                        </PaginationPrevious>
-                      </PaginationItem>
-                      
-                      {Array.from({
-                    length: Math.min(5, getTotalPages(patients))
-                  }, (_, i) => {
-                    const pageNum = i + 1;
-                    return <PaginationItem key={pageNum}>
-                            <PaginationLink onClick={() => setPatientsPage(pageNum)} isActive={patientsPage === pageNum}>
-                              {pageNum}
-                            </PaginationLink>
-                          </PaginationItem>;
-                  })}
-                      
-                      {getTotalPages(patients) > 5 && <PaginationItem>
-                        <PaginationEllipsis />
-                      </PaginationItem>}
-                      
-                      <PaginationItem>
-                        <PaginationNext onClick={() => setPatientsPage(Math.min(getTotalPages(patients), patientsPage + 1))}>
-                          下一页
-                        </PaginationNext>
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>}
+                  {getTotalPages(patients) > 1 && <CustomPagination currentPage={patientsPage} totalPages={getTotalPages(patients)} onPageChange={setPatientsPage} />}
                 </div>}
 
               {activeTab === 'tests' && <div>
