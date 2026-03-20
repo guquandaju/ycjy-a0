@@ -38,26 +38,72 @@ export default function VillageDashboard(props) {
 
       // 获取患者数据
       const patientsResult = await medicalAPI.getPatients('{ "data": [{ "_id": "p001" }]}');
-      if (patientsResult.success) {
+      if (patientsResult.success && patientsResult.data && patientsResult.data.length > 0) {
         setPatients(patientsResult.data);
       } else {
         toast({
           title: "加载患者数据失败",
-          description: patientsResult.error,
+          description: patientsResult.error || "使用模拟数据",
           variant: "destructive"
         });
+        // API失败时使用模拟数据
+        setPatients([{
+          id: 1,
+          name: '张三',
+          age: 45,
+          gender: '男',
+          phone: '138****1234',
+          lastVisit: '2026-03-15'
+        }, {
+          id: 2,
+          name: '李四',
+          age: 32,
+          gender: '女',
+          phone: '139****5678',
+          lastVisit: '2026-03-14'
+        }, {
+          id: 3,
+          name: '王五',
+          age: 68,
+          gender: '男',
+          phone: '137****9012',
+          lastVisit: '2026-03-10'
+        }]);
       }
 
       // 获取检验任务数据
       const tasksResult = await medicalAPI.getTestTasks('{ "data": [{ "_id": "p001" }]}');
-      if (tasksResult.success) {
+      if (tasksResult.success && tasksResult.data && tasksResult.data.length > 0) {
         setTestTasks(tasksResult.data);
       } else {
         toast({
           title: "加载检验任务失败",
-          description: tasksResult.error,
+          description: tasksResult.error || "使用模拟数据",
           variant: "destructive"
         });
+        // API失败时使用模拟数据
+        setTestTasks([{
+          id: 1,
+          patientName: '张三',
+          testType: '血常规',
+          status: 'completed',
+          submitDate: '2026-03-15',
+          resultDate: '2026-03-16'
+        }, {
+          id: 2,
+          patientName: '李四',
+          testType: '尿常规',
+          status: 'in-progress',
+          submitDate: '2026-03-14',
+          resultDate: null
+        }, {
+          id: 3,
+          patientName: '王五',
+          testType: '肝功能',
+          status: 'pending',
+          submitDate: '2026-03-10',
+          resultDate: null
+        }]);
       }
     } catch (error) {
       console.error("加载仪表板数据失败:", error);
