@@ -1,0 +1,46 @@
+// 模拟数据文件
+export const mockPatients = [
+  { id: 1, name: '张三', age: 45, gender: '男', phone: '138****1234', lastVisit: '2026-03-15' },
+  { id: 2, name: '李四', age: 32, gender: '女', phone: '139****5678', lastVisit: '2026-03-14' },
+  { id: 3, name: '王五', age: 68, gender: '男', phone: '137****9012', lastVisit: '2026-03-10' },
+  { id: 4, name: '赵六', age: 29, gender: '男', phone: '136****3456', lastVisit: '2026-03-12' },
+  { id: 5, name: '钱七', age: 55, gender: '女', phone: '135****7890', lastVisit: '2026-03-11' },
+  { id: 6, name: '孙八', age: 41, gender: '男', phone: '134****2345', lastVisit: '2026-03-09' },
+  { id: 7, name: '周九', age: 37, gender: '女', phone: '133****6789', lastVisit: '2026-03-08' },
+  { id: 8, name: '吴十', age: 62, gender: '男', phone: '132****1234', lastVisit: '2026-03-07' },
+  { id: 9, name: '郑十一', age: 48, gender: '女', phone: '131****5678', lastVisit: '2026-03-06' },
+  { id: 10, name: '王十二', age: 33, gender: '男', phone: '130****9012', lastVisit: '2026-03-05' },
+  { id: 11, name: '李十三', age: 59, gender: '女', phone: '139****3456', lastVisit: '2026-03-04' },
+  { id: 12, name: '张十四', age: 26, gender: '男', phone: '138****7890', lastVisit: '2026-03-03' },
+  { id: 13, name: '刘十五', age: 71, gender: '女', phone: '137****2345', lastVisit: '2026-03-02' },
+  { id: 14, name: '陈十六', age: 39, gender: '男', phone: '136****6789', lastVisit: '2026-03-01' },
+  { id: 15, name: '杨十七', age: 52, gender: '女', phone: '135****1234', lastVisit: '2026-02-28' },
+  { id: 16, name: '黄十八', age: 44, gender: '男', phone: '134****5678', lastVisit: '2026-02-27' },
+  { id: 17, name: '林十九', age: 31, gender: '女', phone: '133****9012', lastVisit: '2026-02-26' },
+  { id: 18, name: '郭二十', age: 67, gender: '男', phone: '132****3456', lastVisit: '2026-02-25' },
+  { id: 19, name: '何二十一', age: 36, gender: '女', phone: '131****7890', lastVisit: '2026-02-24' },
+  { id: 20, name: '高二十二', age: 58, gender: '男', phone: '130****2345', lastVisit: '2026-02-23' }
+];
+
+export const mockTestTasks = [
+  { id: 1, patientName: '张三', testType: '血常规', status: 'completed', submitDate: '2026-03-15', resultDate: '2026-03-16' },
+  { id: 2, patientName: '李四', testType: '尿常规', status: 'in-progress', submitDate: '2026-03-14', resultDate: null },
+  { id: 3, patientName: '王五', testType: '肝功能', status: 'pending', submitDate: '2026-03-10', resultDate: null },
+  { id: 4, patientName: '赵六', testType: '血糖检测', status: 'completed', submitDate: '2026-03-12', resultDate: '2026-03-13' },
+  { id: 5, patientName: '钱七', testType: '血脂检测', status: 'in-progress', submitDate: '2026-03-11', resultDate: null },
+  { id: 6, patientName: '孙八', testType: '肾功能', status: 'pending', submitDate: '2026-03-09', resultDate: null },
+  { id: 7, patientName: '周九', testType: '心电图', status: 'completed', submitDate: '2026-03-08', resultDate: '2026-03-09' },
+  { id: 8, patientName: '吴十', testType: 'B超检查', status: 'in-progress', submitDate: '2026-03-07', resultDate: null },
+  { id: 9, patientName: '郑十一', testType: 'X光胸片', status: 'pending', submitDate: '2026-03-06', resultDate: null },
+  { id: 10, patientName: '王十二', testType: '血常规', status: 'completed', submitDate: '2026-03-05', resultDate: '2026-03-06' },
+  { id: 11, patientName: '李十三', testType: '尿常规', status: 'in-progress', submitDate: '2026-03-04', resultDate: null },
+  { id: 12, patientName: '张十四', testType: '肝功能', status: 'pending', submitDate: '2026-03-03', resultDate: null },
+  { id: 13, patientName: '刘十五', testType: '血糖检测', status: 'completed', submitDate: '2026-03-02', resultDate: '2026-03-03' },
+  { id: 14, patientName: '陈十六', testType: '血脂检测', status: 'in-progress', submitDate: '2026-03-01', resultDate: null },
+  { id: 15, patientName: '杨十七', testType: '肾功能', status: 'pending', submitDate: '2026-02-28', resultDate: null },
+  { id: 16, patientName: '黄十八', testType: '心电图', status: 'completed', submitDate: '2026-02-27', resultDate: '2026-02-28' },
+  { id: 17, patientName: '林十九', testType: 'B超检查', status: 'in-progress', submitDate: '2026-02-26', resultDate: null },
+  { id: 18, patientName: '郭二十', testType: 'X光胸片', status: 'pending', submitDate: '2026-02-25', resultDate: null },
+  { id: 19, patientName: '何二十一', testType: '血常规', status: 'completed', submitDate: '2026-02-24', resultDate: '2026-02-25' },
+  { id: 20, patientName: '高二十二', testType: '尿常规', status: 'in-progress', submitDate: '2026-02-23', resultDate: null }
+];
