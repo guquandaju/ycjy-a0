@@ -225,9 +225,9 @@ export const medicalAPI = {
     }) : [];
     
     return {
-      success: response && response.data.mes === '成功',
+      success: response && response.data && response.data.mes === '成功',
       data: adaptedData,
-      message: response ? response.data.mes : '无响应'
+      message: response && response.data ? response.data.mes : '无响应'
     };
   } catch (error) {
     console.error('获取患者数据失败:', error);
@@ -261,9 +261,9 @@ export const medicalAPI = {
         }) : [];
         
         return {
-          success: response && response.data.mes === '成功',
+          success: response && response.data && response.data.mes === '成功',
           data: adaptedData,
-          message: response ? response.data.mes : '无响应'
+          message: response && response.data ? response.data.mes : '无响应'
         };
       } catch (error) {
         console.error('获取患者数据失败:', error);
