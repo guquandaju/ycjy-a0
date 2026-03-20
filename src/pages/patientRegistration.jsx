@@ -122,9 +122,9 @@ export default function PatientRegistration(props) {
               请填写患者的个人信息和联系方式
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6">
             {/* 基本信息 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <div>
                 <Label htmlFor="name">姓名 *</Label>
                 <Input id="name" value={formData.name} onChange={e => handleInputChange('name', e.target.value)} placeholder="请输入患者姓名" />
@@ -167,7 +167,7 @@ export default function PatientRegistration(props) {
             {/* 紧急联系人 */}
             <div className="border-t pt-6">
               <h3 className="text-lg font-semibold mb-4">紧急联系人信息</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
                   <Label htmlFor="emergencyContact">紧急联系人姓名</Label>
                   <Input id="emergencyContact" value={formData.emergencyContact} onChange={e => handleInputChange('emergencyContact', e.target.value)} placeholder="请输入紧急联系人姓名" />
@@ -190,7 +190,7 @@ export default function PatientRegistration(props) {
             </div>
 
             {/* 操作按钮 */}
-            <div className="flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-4 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3 pt-4 sm:pt-6 border-t">
               <Button variant="outline" onClick={handleBack} className="hover:bg-gray-50 active:bg-gray-100 active:scale-95 transition-all duration-200 text-sm sm:text-base">
                 取消
               </Button>
