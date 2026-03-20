@@ -1,7 +1,7 @@
 // @ts-ignore;
 import React from 'react';
 // @ts-ignore;
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, Button } from '@/components/ui';
 
 export function CustomPagination({
   currentPage,
@@ -11,10 +11,10 @@ export function CustomPagination({
   return <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious onClick={() => onPageChange(Math.max(1, currentPage - 1))} className="flex items-center gap-1">
+          <Button variant="ghost" onClick={() => onPageChange(Math.max(1, currentPage - 1))} className="flex items-center gap-1" disabled={currentPage === 1}>
             <span>‹</span>
             <span>上一页</span>
-          </PaginationPrevious>
+          </Button>
         </PaginationItem>
         
         {Array.from({
@@ -33,10 +33,10 @@ export function CustomPagination({
           </PaginationItem>}
         
         <PaginationItem>
-          <PaginationNext onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} className="flex items-center gap-1">
+          <Button variant="ghost" onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))} className="flex items-center gap-1" disabled={currentPage === totalPages}>
             <span>下一页</span>
             <span>›</span>
-          </PaginationNext>
+          </Button>
         </PaginationItem>
       </PaginationContent>
     </Pagination>;

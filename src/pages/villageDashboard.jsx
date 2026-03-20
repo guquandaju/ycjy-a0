@@ -152,9 +152,9 @@ export default function VillageDashboard(props) {
       </div>
 
       {/* 主体内容 */}
-      <div className="space-y-4 sm:space-y-6">
+      <div className="space-y-3 sm:space-y-4">
         {/* 统计卡片 */}
-        <div className="grid grid-cols-2 gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
           <Card>
             <CardContent className="p-6">
               <div className="flex items-center">
@@ -215,7 +215,7 @@ export default function VillageDashboard(props) {
         {/* 标签页 */}
         <Card>
           <div className="border-b">
-            <div className="flex space-x-4">
+            <div className="flex space-x-3 sm:space-x-4">
               <button onClick={() => setActiveTab('patients')} className={`py-2 px-3 border-b-2 font-medium text-sm ${activeTab === 'patients' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
                 患者管理 ({patients.length})
               </button>
@@ -247,7 +247,7 @@ export default function VillageDashboard(props) {
                     </div>)}
                 </div>
                 
-                {getTotalPages(patients) > 1 && <div className="border-t p-4">
+                {getTotalPages(patients) > 1 && <div className="border-t p-3">
                     <CustomPagination currentPage={patientsPage} totalPages={getTotalPages(patients)} onPageChange={setPatientsPage} />
                   </div>}
               </div>}
@@ -276,7 +276,7 @@ export default function VillageDashboard(props) {
                     </div>)}
                 </div>
                 
-                {getTotalPages(testTasks) > 1 && <div className="border-t p-4">
+                {getTotalPages(testTasks) > 1 && <div className="border-t p-3">
                     <CustomPagination currentPage={testsPage} totalPages={getTotalPages(testTasks)} onPageChange={setTestsPage} />
                   </div>}
               </div>}
